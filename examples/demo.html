@@ -64,10 +64,7 @@
         <h1 id="selectionNameTitle">Hello, world!</h1>
         <div>
           <!-- Excluding poster for player for now: poster="http://video-js.zencoder.com/oceans-clip.png" -->
-          <video id="example_video_1" class="video-js vjs-default-skin" controls preload="auto" width="640" height="264" data-setup='{"example_option":true}'>
-            <source src="http://video-js.zencoder.com/oceans-clip.mp4" type='video/mp4' />
-            <source src="http://video-js.zencoder.com/oceans-clip.webm" type='video/webm' />
-            <source src="http://video-js.zencoder.com/oceans-clip.ogv" type='video/ogg' />
+          <video id="video_1" class="video-js vjs-default-skin" controls preload="auto" width="800" height="450" data-setup='{"example_option":true}'>
             <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
           </video>
           <p class="lead">
@@ -76,9 +73,9 @@
         </div>
         
         <script type="text/javascript">
-        function loadVideolog(selection) {
+        function loadVideolog(selection, playerId) {
           var vidDir = "/Volumes/External Intel SSD/Aardvark/aptima-video/screenVideo/";
-          var myPlayer = videojs('example_video_1');
+          var myPlayer = videojs(playerId);
           
           // Set header to selection name
           $('#selectionNameTitle').text(selection);
@@ -88,12 +85,12 @@
         
         <div id="videolist">
           <ul>
-            <li><a onclick="loadVideolog('official_1')">official_1.mov</a></li>
-            <li><a onclick="loadVideolog('official_2')">official_2.mov</a></li>
-            <li><a onclick="loadVideolog('official_3')">official_3.mov</a></li>
-            <li><a onclick="loadVideolog('official_4')">official_4.mov</a></li>
-            <li><a onclick="loadVideolog('official_5')">official_5.mov</a></li>
-            <li><a onclick="loadVideolog('official_6')">official_6.mov</a></li>
+            <li><a onclick="loadVideolog('official_1', 'video_1')">official_1.mp4</a></li>
+            <li><a onclick="loadVideolog('official_2', 'video_1')">official_2.mp4</a></li>
+            <li><a onclick="loadVideolog('official_3', 'video_1')">official_3.mp4</a></li>
+            <li><a onclick="loadVideolog('official_4', 'video_1')">official_4.mp4</a></li>
+            <li><a onclick="loadVideolog('official_5', 'video_1')">official_5.mp4</a></li>
+            <li><a onclick="loadVideolog('official_6', 'video_1')">official_6.mp4</a></li>
           </ul>
         
         <div id="about">
