@@ -27,6 +27,14 @@
     .main-body {
       padding: 40px 15px;
       text-align: left;
+      margin-left: auto;
+      margin-right: auto;
+      width: 900px;
+    }
+    .center {
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
     }
     </style>
 
@@ -61,100 +69,39 @@
     <div class="container">
 
       <div class="main-body">
-        <h1 id="selectionNameTitle">Hello, world!</h1>
+        <h1 id="selectionNameTitle">Select a Video</h1>
         <div>
           <!-- Excluding poster for player for now: poster="http://video-js.zencoder.com/oceans-clip.png" -->
-          <video id="video_1" class="video-js vjs-default-skin" controls preload="auto" width="800" height="450" data-setup='{"example_option":true}'>
+          <video id="video_1" class="center video-js vjs-default-skin" controls preload="auto" width="800" height="450" data-setup='{"example_option":true}'>
             <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
           </video>
-          <p id="actionTitle" class="lead">
-            foo
-          </p>
+          <p id="actionTitle" class="lead center"></p>
+          
         </div>
-        
-        <script type="text/javascript">
-        var floor = Math.floor;
-        
-        function clamp(a, min, max) {
-          if (a < min) return min;
-          if (a > max) return max;
-          return a;
-        }
-        
-        function loadClip(src, start, action, playerId) {
-          var bufferSecs = 1;
-          var myPlayer = videojs(playerId);
-          var bufferedStartSec = floor(parseInt(start)/1000) - bufferSecs;
-          
-          // Set caption to action name, load video src
-          $('#actionTitle').text(action);
-          
-          myPlayer.src(src);
-          bufferedStartSec = clamp(bufferedStartSec, 0, myPlayer.duration());
-          myPlayer.currentTime(bufferedStartSec);
-        }
-        
-        function loadVideolog(selection, playerId) {
-          var vidDir = "/Volumes/External Intel SSD/Aardvark/aptima-video/screenVideo/";
-          var logDir = "/Volumes/External Intel SSD/Aardvark/aptima-video/example_logs/vcode_outputs/";
-          var myPlayer = videojs(playerId);
-          
-          // Set header to selection name, load video src
-          $('#selectionNameTitle').text(selection);
-          var src = vidDir + "official_" + selection + '.mp4';
-          myPlayer.src(src);
-          
-          // Parse log into UL of actions
-          var logFile = logDir + selection + '.txt';
-          //document.doman = 'localhost';
-          $.get(logFile, function(data) {
-            var lines = data.split('\n');
-            var line = null;
-            var parts = null;
-            var start = null;
-            var duration = null;
-            var action = null;
-            var newli = null;
-            
-            $('#actionlist ul').html('');
-            
-            for (var i = 0; i < lines.length; i++) {
-              line = lines[i].trim();
-              if (line) {
-                parts = line.split(',');
-                start = parts[0];
-                duration = parts[1];
-                action = parts[2];
 
-                newli = '<li><a onclick="loadClip(\''+src+'\',\''+
-                        start+'\',\''+action+'\',\'' + 
-                        playerId+'\')">Time: '+start+', '+action+'</a></li>';
-                
-                //console.log(newli);
-                $('#actionlist ul').append(newli);
-              }
-            }
-          }, 'text');
-        }
-        </script>
-        
-        <div id="videolist">
-          <ul>
-            <li><a onclick="loadVideolog('1', 'video_1');">official_1.mp4</a></li>
-            <li><a onclick="loadVideolog('2', 'video_1');">official_2.mp4</a></li>
-            <li><a onclick="loadVideolog('3', 'video_1');">official_3.mp4</a></li>
-            <li><a onclick="loadVideolog('4', 'video_1');">official_4.mp4</a></li>
-            <li><a onclick="loadVideolog('5', 'video_1');">official_5.mp4</a></li>
-            <li><a onclick="loadVideolog('6', 'video_1');">official_6.mp4</a></li>
-          </ul>
-        </div>
-        
-        <div id="log-info">
-          <h3>Log</h3>
-          <div id="actionlist">
-            <ul></ul>
+        <div class="row">
+          <div id="logs-info" class="col-md-3">
+            <h3>Logs</h3>
+            <div id="videolist">
+              <ul>
+                <li><a onclick="loadVideolog('1', 'video_1');">official_1.mp4</a></li>
+                <li><a onclick="loadVideolog('2', 'video_1');">official_2.mp4</a></li>
+                <li><a onclick="loadVideolog('3', 'video_1');">official_3.mp4</a></li>
+                <li><a onclick="loadVideolog('4', 'video_1');">official_4.mp4</a></li>
+                <li><a onclick="loadVideolog('5', 'video_1');">official_5.mp4</a></li>
+                <li><a onclick="loadVideolog('6', 'video_1');">official_6.mp4</a></li>
+              </ul>
+            </div>
           </div>
-        </div>
+        
+          <div id="actions-info" class="col-md-8">
+            <h3>Actions</h3>
+            <div id="actionlist">
+              <ul></ul>
+            </div>
+          </div>
+          
+        </div> <!-- /.row -->
         
         <div id="about">
           <h3>About</h3>
@@ -173,6 +120,7 @@
       </div><!-- /.main-body -->
     </div><!-- /.container -->
   
+    <script src="../src/videolog.js"></script>
     <!-- Plugins -->
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
