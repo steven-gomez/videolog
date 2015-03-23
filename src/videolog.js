@@ -2,6 +2,14 @@ var floor = Math.floor;
 var videoPrefix = "official_";
 var vidDir = "/Volumes/External Intel SSD/Aardvark/aptima-video/screenVideo/";
 var logDir = "/Volumes/External Intel SSD/Aardvark/aptima-video/example_logs/vcode_outputs/";
+var linksReturnToPlayer = true;
+
+var indicatorClass = "glyphicon glyphicon-menu-right";
+
+$('.log_item').click(function() {
+  $('.log_item > .indicator-span').removeClass(indicatorClass);
+  $(this).children('.indicator-span').addClass(indicatorClass);
+});
 
 function clamp(a, min, max) {
   if (a < min) return min;
@@ -25,6 +33,12 @@ function loadClip(src, start, duration, action, playerId) {
   
   myPlayer.currentTime(bufferedStartSec);
   myPlayer.one('play', function() { pauseAfterClip(myPlayer, duration, bufferSecs); } );
+  
+  if (linksReturnToPlayer) {
+    $('html, body').animate({
+      scrollTop: $("#selectionTitle").offset().top-50
+    }, 'slow'); 
+  } 
 }
 
 function pauseAfterClip(myPlayer, duration, bufferSecs) {
@@ -41,7 +55,7 @@ function loadVideolog(selection, playerId) {
   
   // Set header to selection name, load video src
   var vidName = videoPrefix + selection + '.mp4';
-  $('#selectionNameTitle').text("Video: " + vidName);
+  $('#selectionTitle').text("Video: " + vidName);
   var src = vidDir + vidName;
   myPlayer.src(src);
   

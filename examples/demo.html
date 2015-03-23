@@ -36,6 +36,7 @@
       margin-right: auto;
       text-align: center;
     }
+
     </style>
 
     <script type="text/javascript">
@@ -69,7 +70,7 @@
     <div class="container">
 
       <div class="main-body">
-        <h1 id="selectionNameTitle">Select a Video</h1>
+        <h1 id="selectionTitle">Select a Video</h1>
         <div>
           <!-- Excluding poster for player for now: poster="http://video-js.zencoder.com/oceans-clip.png" -->
           <video id="video_1" class="center video-js vjs-default-skin" controls preload="auto" width="800" height="450" data-setup='{"example_option":true}'>
@@ -84,12 +85,12 @@
             <h3>Logs</h3>
             <div id="videolist">
               <ul>
-                <li><a onclick="loadVideolog('1', 'video_1');">official_1.mp4</a></li>
-                <li><a onclick="loadVideolog('2', 'video_1');">official_2.mp4</a></li>
-                <li><a onclick="loadVideolog('3', 'video_1');">official_3.mp4</a></li>
-                <li><a onclick="loadVideolog('4', 'video_1');">official_4.mp4</a></li>
-                <li><a onclick="loadVideolog('5', 'video_1');">official_5.mp4</a></li>
-                <li><a onclick="loadVideolog('6', 'video_1');">official_6.mp4</a></li>
+                <li><a class="log_item" onclick="loadVideolog('1', 'video_1');">official_1.mp4 <span class="indicator-span" aria-hidden="true"></a></span></li>
+                <li><a class="log_item" onclick="loadVideolog('2', 'video_1');">official_2.mp4 <span class="indicator-span" aria-hidden="true"></a></li>
+                <li><a class="log_item" onclick="loadVideolog('3', 'video_1');">official_3.mp4 <span class="indicator-span" aria-hidden="true"></a></li>
+                <li><a class="log_item" onclick="loadVideolog('4', 'video_1');">official_4.mp4 <span class="indicator-span" aria-hidden="true"></a></li>
+                <li><a class="log_item" onclick="loadVideolog('5', 'video_1');">official_5.mp4 <span class="indicator-span" aria-hidden="true"></a></li>
+                <li><a class="log_item" onclick="loadVideolog('6', 'video_1');">official_6.mp4 <span class="indicator-span" aria-hidden="true"></a></span></li>
               </ul>
             </div>
           </div>
@@ -120,11 +121,12 @@
       </div><!-- /.main-body -->
     </div><!-- /.container -->
   
-    <script src="../src/videolog.js"></script>
     <!-- Plugins -->
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <script src="https://vjs.zencdn.net/4.12/video.js"></script>
+    
+    <script src="../src/videolog.js"></script>
   </body>
 </html>
