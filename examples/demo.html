@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
 
     <!-- Videojs -->
-    <link href="//vjs.zencdn.net/4.12/video-js.css" rel="stylesheet">
+    <link href="https://vjs.zencdn.net/4.12/video-js.css" rel="stylesheet">
   
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -61,30 +61,52 @@
     <div class="container">
 
       <div class="main-body">
-        <h2>Hello, world!</h2>
+        <h1 id="selectionNameTitle">Hello, world!</h1>
         <div>
-          <video id="example_video_1" class="video-js vjs-default-skin" controls preload="auto" width="640" height="264"poster="http://video-js.zencoder.com/oceans-clip.png"data-setup='{"example_option":true}'>
+          <!-- Excluding poster for player for now: poster="http://video-js.zencoder.com/oceans-clip.png" -->
+          <video id="example_video_1" class="video-js vjs-default-skin" controls preload="auto" width="640" height="264" data-setup='{"example_option":true}'>
             <source src="http://video-js.zencoder.com/oceans-clip.mp4" type='video/mp4' />
             <source src="http://video-js.zencoder.com/oceans-clip.webm" type='video/webm' />
             <source src="http://video-js.zencoder.com/oceans-clip.ogv" type='video/ogg' />
             <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
           </video>
           <p class="lead">
-            This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption.
+            foo
+          </p>
+        </div>
+        
+        <script type="text/javascript">
+        function loadVideolog(selection) {
+          var vidDir = "/Volumes/External Intel SSD/Aardvark/aptima-video/screenVideo/";
+          var myPlayer = videojs('example_video_1');
+          
+          // Set header to selection name
+          $('#selectionNameTitle').text(selection);
+          myPlayer.src(vidDir+selection+'.mp4');
+        }
+        </script>
+        
+        <div id="videolist">
+          <ul>
+            <li><a onclick="loadVideolog('official_1')">official_1.mov</a></li>
+            <li><a onclick="loadVideolog('official_2')">official_2.mov</a></li>
+            <li><a onclick="loadVideolog('official_3')">official_3.mov</a></li>
+            <li><a onclick="loadVideolog('official_4')">official_4.mov</a></li>
+            <li><a onclick="loadVideolog('official_5')">official_5.mov</a></li>
+            <li><a onclick="loadVideolog('official_6')">official_6.mov</a></li>
+          </ul>
+        
+        <div id="about">
+          <h3>About</h3>
+          <p>
+            Videocode is a web inferface for viewing segments of video corresponding to annotated actions. Each full video must have a log file that indicate when annotated actions occur, including a start time and duration. Videocode parses the action log file and provides an interface for advancing the video player's playhead to a user-selected action.
           </p>
         </div>
         
         <div id="contact">
-          <h2>About</h2>
-          <p class="lead">
-            This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption.
-          </p>
-        </div>
-        
-        <div id="contact">
-          <h2>Contact</h2>
-          <p class="lead">
-            This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption. This is the video caption.
+          <h3>Contact</h3>
+          <p>
+            Videocode was created by Steve Gomez using the <a href="videojs.com">video.js</a> library. For comments or other feedback, contact Steve at steveg@cs.brown.edu.
           </p>
         </div>
         
@@ -95,6 +117,6 @@
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-    <script src="//vjs.zencdn.net/4.12/video.js"></script>
+    <script src="https://vjs.zencdn.net/4.12/video.js"></script>
   </body>
 </html>
