@@ -75,23 +75,60 @@
         <script type="text/javascript">
         function loadVideolog(selection, playerId) {
           var vidDir = "/Volumes/External Intel SSD/Aardvark/aptima-video/screenVideo/";
+          var logDir = "/Volumes/External Intel SSD/Aardvark/aptima-video/example_logs/vcode_outputs/";
           var myPlayer = videojs(playerId);
           
-          // Set header to selection name
+          // Set header to selection name, load video src
           $('#selectionNameTitle').text(selection);
-          myPlayer.src(vidDir+selection+'.mp4');
+          myPlayer.src(vidDir + "official_" + selection + '.mp4');
+          
+          // Parse log into UL of actions
+          var logFile = logDir + selection + '.txt';
+          document.doman = 'localhost';
+          $.get(logFile, function(data) {
+            var lines = data.split('\n');
+            var line = null;
+            var parts = null;
+            var start = null;
+            var duration = null;
+            var action = null;
+            
+            $('#actionlist ul').html('')
+            
+            for (var i = 0; i < lines.length; i++) {
+              line = lines[i].trim();
+              if (line) {
+                parts = line.split(',');
+                start = parts[0];
+                duration = parts[1];
+                action = parts[2];
+                console.log("action: " + action); 
+                
+                $('#actionlist ul').append('<li>'+action+'</li>');
+
+              }
+            }
+          }, 'text');
         }
         </script>
         
         <div id="videolist">
           <ul>
-            <li><a onclick="loadVideolog('official_1', 'video_1')">official_1.mp4</a></li>
-            <li><a onclick="loadVideolog('official_2', 'video_1')">official_2.mp4</a></li>
-            <li><a onclick="loadVideolog('official_3', 'video_1')">official_3.mp4</a></li>
-            <li><a onclick="loadVideolog('official_4', 'video_1')">official_4.mp4</a></li>
-            <li><a onclick="loadVideolog('official_5', 'video_1')">official_5.mp4</a></li>
-            <li><a onclick="loadVideolog('official_6', 'video_1')">official_6.mp4</a></li>
+            <li><a onclick="loadVideolog('1', 'video_1')">official_1.mp4</a></li>
+            <li><a onclick="loadVideolog('2', 'video_1')">official_2.mp4</a></li>
+            <li><a onclick="loadVideolog('3', 'video_1')">official_3.mp4</a></li>
+            <li><a onclick="loadVideolog('4', 'video_1')">official_4.mp4</a></li>
+            <li><a onclick="loadVideolog('5', 'video_1')">official_5.mp4</a></li>
+            <li><a onclick="loadVideolog('6', 'video_1')">official_6.mp4</a></li>
           </ul>
+        </div>
+        
+        <div id="log-info">
+          <h3>Log</h3>
+          <div id="actionlist">
+            <ul></ul>
+          </div>
+        </div>
         
         <div id="about">
           <h3>About</h3>
