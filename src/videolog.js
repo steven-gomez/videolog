@@ -52,6 +52,7 @@ function pauseAfterClip(myPlayer, duration, bufferSecs) {
 
 function loadVideolog(selection, playerId) {
   var myPlayer = videojs(playerId);
+  var uniqueActions = d3.set(); // use d3 set data structure
   
   // Set header to selection name, load video src
   var vidName = videoPrefix + selection + '.mp4';
@@ -72,26 +73,68 @@ function loadVideolog(selection, playerId) {
     var newli = null;
     
     $('#actionlist ul').html('');
+    $('#filterlist ul').html('');
     
     for (var i = 0; i < lines.length; i++) {
       line = lines[i].trim();
       if (line) {
         parts = line.split(',');
-        start = parseInt(parts[0]);
-        duration = parseInt(parts[1]);
         action = parts[2];
-
-        newli = '<li><a onclick="loadClip(\''+
-                src+'\',\''+
-                start+'\',\''+
-                duration+'\',\''+
-                action+'\',\'' + 
-                playerId+'\')">' +
-                'Time: '+start+', ' + action+'</a></li>';
         
-        //console.log(newli);
-        $('#actionlist ul').append(newli);
+        if (!uniqueActions.has(action)) {
+          uniqueActions.add(action);
+          //console.log("Added action: "+action);
+        }
       }
     }
+    
+    // test
+    console.log("uniques: "+uniqueActions.values());
+    uniqueActions.forEach(function(x) {
+      console.log("for each: " + x);
+      newli = '<li><input type="checkbox" class="filter-checkbox" id="'+x+'"> '+x+'</li>'
+      $('#filterlist ul').append(newli);
+      
+    });
+    
+    $(".filter-checkbox").change(function() {
+      
+      // Clear the action list, then repopulate with the filtered items
+      $('#actionlist ul').html('');
+      
+      // Go through and add a li to the action list for each
+      // log action that matches one of the checked types
+      
+      var checkedActionTypes = $(".filter-checkbox").map(function() {
+        if (this.checked) return this.id;
+      }).get();
+      console.log(checkedActionTypes);
+      
+      for (var i = 0; i < lines.length; i++) {
+        line = lines[i].trim();
+        if (line) {
+          parts = line.split(',');
+          start = parseInt(parts[0]);
+          duration = parseInt(parts[1]);
+          action = parts[2];
+          
+          // If this logged action is in the selected filter list,
+          // append it to action list
+          if (checkedActionTypes.indexOf(action) > -1) {
+            newli = '<li><a onclick="loadClip(\''+
+                    src+'\',\''+
+                    start+'\',\''+
+                    duration+'\',\''+
+                    action+'\',\'' + 
+                    playerId+'\')">' +
+                    'Time: '+start+', ' + action+'</a></li>';
+        
+            //console.log(newli);
+            $('#actionlist ul').append(newli);
+          }
+        }
+      }
+    });
+    
   }, 'text');
 }
