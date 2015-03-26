@@ -182,7 +182,7 @@ function addLogFilters(mapping, logData, src, playerId) {
                   duration+'\',\''+
                   action+'\',\'' + 
                   playerId+'\')">' +
-                  'Time: '+start+', <strong>' + mapping[action]+'</strong> [' + action+']</a></li>';
+                  '<span class="timeLabel">Time: '+start+'</span> <strong>' + mapping[action]+'</strong> [' + action+']</a></li>';
       
           //console.log(newli);
           $('#actionlist ul').append(newli);
